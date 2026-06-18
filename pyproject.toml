@@ -1,22 +1,54 @@
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-asyncio_mode = "auto"
-# Test-taxonomy markers added at collection time by tests/conftest.py. The
-# stable area_* markers are declared here; the dynamic sub_<filename-token>
-# markers are registered before collection by pytest_configure in
-# tests/conftest.py, so unknown-mark warnings still flag genuine typos outside
-# the taxonomy. See tests/_taxonomy.py and tests/README.md.
-markers = [
-    "area_security: tests covering auth, owner-scope, SSRF, XSS, confinement, redaction",
-    "area_routes: tests covering HTTP route / API behavior",
-    "area_services: tests covering service-layer behavior (llm, cookbook, email, calendar, ...)",
-    "area_cli: tests covering CLI / script behavior",
-    "area_js: JavaScript / Node-backed tests",
-    "area_helpers: self-tests for the shared test helpers in tests/helpers/",
-    "area_unit: pure parser / utility tests that do not clearly belong elsewhere",
-    "area_uncategorized: tests not yet matched by the taxonomy (fallback)",
-    # Fast-lane marker (issue #3443). Opt-in and orthogonal to the area_*/sub_*
-    # taxonomy. The fast lane runs `not slow`; mark a test slow only with
-    # duration evidence (see tests/run_focus.py --durations and tests/README.md).
-    "slow: opt-in marker for known-slow tests; excluded by the fast lane (not slow)",
+[project]
+name = "odysseus"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "bcrypt>=5.0.0",
+    "beautifulsoup4>=4.15.0",
+    "caldav>=3.2.1",
+    "charset-normalizer>=3.4.7",
+    "chromadb-client>=1.5.9",
+    "croniter>=6.2.2",
+    "cryptography>=49.0.0",
+    "fastapi>=0.137.2",
+    "fastembed>=0.8.0",
+    "httpx>=0.28.1",
+    "httpx2>=2.4.0",
+    "huggingface-hub>=1.19.0",
+    "icalendar>=7.1.3",
+    "markdown>=3.10.2",
+    "mcp>=1.28.0",
+    "nh3>=0.3.5",
+    "numpy>=2.4.6",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.1",
+    "pyotp>=2.10.0",
+    "pypdf>=6.13.3",
+    "pytest>=9.1.0",
+    "pytest-asyncio>=1.4.0",
+    "python-dateutil>=2.9.0.post0",
+    "python-dotenv>=1.2.2",
+    "python-multipart>=0.0.32",
+    "qrcode[pil]>=8.2",
+    "sqlalchemy>=2.0.51",
+    "uvicorn>=0.49.0",
+    "youtube-transcript-api>=1.2.4",
 ]
+
+[project.optional-dependencies]
+whisper = [
+    "faster-whisper>=1.2.1",
+]
+duckduckgo = [
+    "ddgs>=9.14.4",
+]
+mupdf = [
+    "pymupdf>=1.27.2.3",
+]
+markitdown = [
+    "markitdown[docx,pptx,xls,xlsx]==0.1.6",
+]
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
